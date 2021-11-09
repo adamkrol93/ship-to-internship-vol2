@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static model.Size.MAX_POSSIBLE_FIT;
+
 public class Idemiomat {
 
     private List<Cubicle> cubicles;
+
     private int n;
     private int m = 0;
 
@@ -31,15 +34,26 @@ public class Idemiomat {
         if (packages.isEmpty()) {
             return;
         }
-        for (int i = 0; i < cubicles.size(); i++) {
-            if (cubicles.get(i).isFree()) {
-                cubicles.set(i, new Cubicle(State.TAKEN));
-                packages.remove(0);
-                if (packages.isEmpty()) {
-                    break;
+        packages.forEach(p -> {
+            int bestFit = MAX_POSSIBLE_FIT + 1;
+            int bestFitIndex = -1;
+            for (int i = 0; i < cubicles.size(); i++) {
+                Cubicle cubicleOfInterest = cubicles.get(i);
+                int fit = cubicleOfInterest.fit(p);
+                if (fit == 1) {
+                    cubicles.set(i, cubicleOfInterest.insert(p));
+                    return;
+                } else if (fit != 0 && fit < bestFit) {
+                    bestFit = fit;
+                    bestFitIndex = i;
                 }
             }
-        }
+            if (bestFitIndex != -1) {
+                cubicles.set(bestFitIndex, cubicles.get(bestFitIndex).insert(p));
+            } else {
+                //Full
+            }
+        });
     }
 
     public List<List<Cubicle>> get() {

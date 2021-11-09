@@ -3,13 +3,12 @@ import model.Cubicle;
 import model.Idemiomat;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import static model.ConsoleParser.LINE_DELIMITER;
+import static model.ConsoleParser.WALL_DELIMITER;
 
 public class App {
     public static void main(String... args) {
@@ -21,7 +20,7 @@ public class App {
         Idemiomat idemiomat = new Idemiomat();
         while (sc.hasNext()) {
             String line = sc.nextLine();
-            if (line.startsWith(LINE_DELIMITER)) {
+            if (line.startsWith(WALL_DELIMITER)) {
                 idemiomat.addRow(ConsoleParser.parseLine(line));
             } else if (line.startsWith("S")) {
                 print(outputStream, idemiomat);
@@ -39,4 +38,5 @@ public class App {
             outputStream.println("|" + row + "|");
         });
     }
+
 }
