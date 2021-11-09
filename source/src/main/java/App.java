@@ -22,6 +22,9 @@ public class App {
             String line = sc.nextLine();
             if (line.startsWith(WALL_DELIMITER)) {
                 idemiomat.addRow(ConsoleParser.parseLine(line));
+            } else if (line.startsWith("T")) {
+                ConsoleParser.parseTaker(line).forEach(idemiomat::take);
+                print(outputStream, idemiomat);
             } else if (line.startsWith("S")) {
                 print(outputStream, idemiomat);
             } else if (line.startsWith("B")) {
