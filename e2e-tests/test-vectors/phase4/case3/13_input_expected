@@ -1,0 +1,91 @@
+[
+  [
+    {
+      "rozmiar": "S",
+      "paczki": [
+        "S"
+      ],
+      "użytkownik": "Maniek"
+    },
+    {
+      "rozmiar": "M",
+      "paczki": [
+        "M"
+      ],
+      "użytkownik": "Bartek"
+    },
+    {
+      "rozmiar": "S",
+      "paczki": [
+        "S"
+      ],
+      "użytkownik": "Bartek"
+    },
+    {
+      "rozmiar": "S",
+      "paczki": [
+        "S"
+      ],
+      "użytkownik": "Zygmunt"
+    }
+  ],
+  [
+    {
+      "rozmiar": "M",
+      "paczki": [
+        "M"
+      ],
+      "użytkownik": "Adam"
+    },
+    {
+      "rozmiar": "M",
+      "paczki": [
+        "S",
+        "S"
+      ],
+      "użytkownik": "Alfred"
+    },
+    {
+      "rozmiar": "S",
+      "paczki": [
+        "S"
+      ],
+      "użytkownik": "Krzysztof"
+    },
+    {
+      "rozmiar": "S",
+      "paczki": [
+        "S"
+      ],
+      "użytkownik": "Piotr"
+    }
+  ],
+  [
+    {
+      "rozmiar": "L",
+      "paczki": [],
+      "użytkownik": null
+    },
+    {
+      "rozmiar": "S",
+      "paczki": [
+        "S"
+      ],
+      "użytkownik": "Bartek"
+    },
+    {
+      "rozmiar": "L",
+      "paczki": [
+        "S",
+        "S",
+        "M"
+      ],
+      "użytkownik": "Bartek"
+    },
+    {
+      "rozmiar": "M",
+      "paczki": [],
+      "użytkownik": null
+    }
+  ]
+]
