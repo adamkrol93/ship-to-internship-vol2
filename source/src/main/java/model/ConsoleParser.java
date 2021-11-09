@@ -53,15 +53,8 @@ public class ConsoleParser {
                 .collect(Collectors.toList());
 
     private static Optional<Stream<Package>> stringToPackage(String s) {
-        if (s.startsWith("B")) {
-            if (s.length() == 1) {
-                return Optional.of(Stream.of(new Package(S)));
-            } else {
-                return Optional.of(s.replace("B", "").chars()
-                        .mapToObj(ch -> Character.toString(ch))
-                        .map(Size::valueOf)
-                        .map(Package::new));
-            }
+        if (s.startsWith(PUT_OPERATION_CHAR)) {
+            return parsePackage(s.replace(PUT_OPERATION_CHAR, ""));
         } else {
             return Optional.empty();
         }
