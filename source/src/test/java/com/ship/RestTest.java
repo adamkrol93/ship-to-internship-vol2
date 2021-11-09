@@ -1,6 +1,7 @@
 package com.ship;
 
 import com.ship.http.dto.CubicleDto;
+import com.ship.http.dto.OpenDto;
 import com.ship.http.dto.PackageDto;
 import com.ship.model.Size;
 import org.junit.jupiter.api.Test;
@@ -80,13 +81,41 @@ public class RestTest {
                 "/box/{userId}",
                 HttpMethod.DELETE,
                 new HttpEntity<>(headers),
-                new ParameterizedTypeReference<>() {},
+                new ParameterizedTypeReference<>() {
+                },
                 "owner");
 
         //then
         assertThat(result.getBody())
                 .extracting(PackageDto::getSize)
                 .containsExactly(S, S, S, M, L);
+    }
+
+    @Test
+    public void shouldTakeOpenSigned() {
+        //given
+        List<List<CubicleDto>> idemiomat = List.of(
+                List.of(getCubicle(S), getCubicle(L, List.of(M, S, S), "owner")),
+                List.of(getCubicle(S, List.of(S), "owner"), getCubicle(L, List.of(L), "owner")));
+        ResponseEntity<String> response = client.postForEntity(
+                "/idemiomat",
+                idemiomat,
+                String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        //when
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        ResponseEntity<OpenDto> result = client.exchange(
+                "/idemiomat/size",
+                HttpMethod.GET,
+                new HttpEntity<>(headers),
+                OpenDto.class);
+
+        //then
+        OpenDto body = result.getBody();
+        assertThat(body.getSize()).isEqualTo(1);
+        assertThat(body.getSignature()).isEqualTo("816DCAE8B86877DD1AA2E47FF676F35298CC5C1E6769B13755B9AE542D610C41");
     }
 
     private CubicleDto getCubicle(Size size) {

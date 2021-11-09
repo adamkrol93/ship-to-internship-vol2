@@ -7,11 +7,13 @@ import lombok.Setter;
 @Setter
 public class OpenDto {
     private long size;
+    private String signature;
 
     public OpenDto() {
     }
 
-    public OpenDto(long size) {
+    public OpenDto(long size, String signature) {
         this.size = size;
+        this.signature = signature;
     }
 }
